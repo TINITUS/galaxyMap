@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>sample sol system</title>
+    <style>
+        html,body{
+            height: 100%;
+        }
+        *{
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video{
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+            margin: 0;
+            padding: 0;
+        }
+        .container{
+            z-index: 1;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            border: 1px solid gray;
+            background-color: black;
+        }
+        .solSys {
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            width: 16em;
+            height: 16em;
+        }
+        .sol,.orbit,.planet,.pos{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border-radius: 50%;
+        }
+
+        .orbit{
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            -webkit-animation: 'rotation' 2s linear;
+            -webkit-animation-iteration-count: infinite;
+        }
+
+        #solI.orbit{
+            width: 6em;
+            height: 6em;
+            margin-top: -3em;
+            margin-left: -3em;
+            background-color: transparent;
+        }
+        .pos{
+            width: 1em;
+            height: 1em;
+            margin-top: -0.5em;
+            margin-left: -0.5em;
+        }
+        .planet{
+            width: 1em;
+            height: 1em;
+            margin-top: -0.5em;
+            margin-left: -0.5em;
+            background-color: #202020;
+            background-repeat: no-repeat;
+            background-size: cover;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+        #solII.orbit{
+            width: 10em;
+            height: 10em;
+            margin-top: -5em;
+            margin-left: -5em;
+            background-color: transparent;
+        }
+        #solIII.orbit{
+            width: 13em;
+            height: 13em;
+            margin-top: -6.5em;
+            margin-left: -6.5em;
+            background-color: transparent;
+        }
+        .sol{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 2em;
+            height: 2em;
+            margin-top: -1em;
+            margin-left: -1em;
+            background-color: yellow;
+        }
+        @-webkit-keyframes rotation{
+            0%   { -webkit-transform: rotate(0deg);}
+            100% { -webkit-transform: rotate(-360deg);}
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="solSys">
+        <div id="solIII" class="orbit">
+            <div class="planet"></div>
+        </div>
+    </div>
+    <div id="solII" class="orbit">
+        <div class="pos">
+            <div class="planet"></div>
+        </div>
+    </div>
+    <div id="solI" class="orbit">
+        <div class="pos">
+            <div class="planet"></div>
+        </div>
+    </div>
+    <div class="sol"></div>
+</div>
+</div>
+</body>
+</html>
+<div class="pos">

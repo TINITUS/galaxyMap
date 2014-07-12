@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>galaxy map</title>
+    <style>
+        body{
+            font-size: 1em;
+        }
+        main{
+            overflow: hidden;
+            width:960px;
+            height:700px;
+            background-color: black;
+            position: relative;
+        }
+        .galaxyCanvas{
+            position: absolute;
+            top:0;
+            left: 0;
+            background-color: transparent;
+            width: 100%;
+            height: 100%;
+        }
+        .solSys {
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            width: 16em;
+            height: 16em;
+        }
+        .sol,.orbit,.planet,.pos{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border-radius: 50%;
+        }
+        .orbit{
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .orbit:nth-child(1){
+            -webkit-animation: 'rotation' 3.5s linear;
+            -webkit-animation-iteration-count: infinite;
+        }
+        .orbit:nth-child(2){
+            -webkit-animation: 'rotation' 2s linear;
+            -webkit-animation-iteration-count: infinite;
+        }
+        .orbit:nth-child(3){
+            -webkit-animation: 'rotation' 1.5s linear;
+            -webkit-animation-iteration-count: infinite;
+        }
+        .pos{
+            width: 1em;
+            height: 1em;
+            margin-top: -0.5em;
+            margin-left: -0.5em;
+        }
+        .planet{
+            width: 1em;
+            height: 1em;
+            margin-top: -0.5em;
+            margin-left: -0.5em;
+            background-color: #af7a1e;
+            background-repeat: no-repeat;
+            background-size: cover;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+        #solI.orbit, #zezdaI.orbit, #starI.orbit{
+            width: 6em;
+            height: 6em;
+            margin-top: -3em;
+            margin-left: -3em;
+            background-color: transparent;
+        }
+        #solII.orbit, #zezdaII.orbit, #starII.orbit{
+            width: 10em;
+            height: 10em;
+            margin-top: -5em;
+            margin-left: -5em;
+            background-color: transparent;
+        }
+        #solIII.orbit, #zezdaIII.orbit, #starIII.orbit{
+            width: 13em;
+            height: 13em;
+            margin-top: -6.5em;
+            margin-left: -6.5em;
+            background-color: transparent;
+        }
+        .orbit > .pos {
+            top: 50%;
+            left: 0;
+        }
+        .sol{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 2em;
+            height: 2em;
+            margin-top: -1em;
+            margin-left: -1em;
+            background-color: yellow;
+        }
+        @-webkit-keyframes rotation{
+            0%   { -webkit-transform: rotate(0deg);}
+            100% { -webkit-transform: rotate(-360deg);}
+        }
+    </style>
+</head>
+<body>
+<header>
+    Map like behavior of a page elements playground
+</header>
+<main id="container">
+  <div class="galaxyCanvas" style="font-size: 0.01em;" id="galaxy">
+      <div class="solSys" style="left: 50%;top: 50%;">
+          <div id="solIII" class="orbit">
+              <div class="pos">
+                  <div class="planet"></div>
+              </div>
+          </div>
+          <div id="solII" class="orbit">
+              <div class="pos">
+                  <div class="planet"></div>
+              </div>
+          </div>
+          <div id="solI" class="orbit">
+              <div class="pos">
+                  <div class="planet"></div>
+              </div>
+          </div>
+          <div class="sol"></div>
+      </div>
+      <div class="solSys" style="left: 10%;top: 10%">
+          <div id="starIII" class="orbit">
+              <div class="pos">
+                  <div class="planet"></div>
+              </div>
+          </div>
+          <div id="starII" class="orbit">
+              <div class="pos">
+                  <div class="planet"></div>
+              </div>
+          </div>
+          <div id="starI" class="orbit">
+              <div class="pos">
+                  <div class="planet"></div>
+              </div>
+          </div>
+          <div class="sol"></div>
+      </div>
+      <div class="solSys" style="left: 70%;top: 70%;">
+          <div id="zezdaIII" class="orbit">
+              <div class="pos">
+                  <div class="planet"></div>
+              </div>
+          </div>
+          <div id="zezdaII" class="orbit">
+              <div class="pos">
+                  <div class="planet"></div>
+              </div>
+          </div>
+          <div id="zezdaI" class="orbit">
+              <div class="pos">
+                  <div class="planet"></div>
+              </div>
+          </div>
+          <div class="sol"></div>
+      </div>
+  </div>
+</main>
+<footer>
+    mzografski
+</footer>
+<script>
+var galContainer = document.getElementById('container');
+var galaxy = document.getElementById('galaxy');
+if(galContainer.addEventListener){
+    galContainer.addEventListener("mousewheel", zoomGalaxy, false);
+    galContainer.addEventListener("DOMMouseScroll", zoomGalaxy, false);
+    galaxy.addEventListener("drag", panGalaxy, false);
+    galaxy.addEventListener("dragend", panGalaxyEnd, false);
+}else{
+    galContainer.attachEvent("onmousewheel", zoomGalaxy);
+    galaxy.attachEvent("ondrag", panGalaxy);
+    galaxy.attachEvent("ondragend", panGalaxyEnd);
+}
+
+function panGalaxy(e){
+    var e = window.event || e;
+    console.log(e);
+    console.log("x=> " + e.x + "  y=> " + e.y);
+    e.target.style.left = e.x + "px";
+    e.target.style.top = e.y + "px";
+}
+function panGalaxyEnd(e){
+    var e = window.event || e;
+    console.log("from end event:");
+    console.log(e)
+    console.log("left: " + e.x + " - " + 1000  + "px =>" + (e.x - 1000) + "px" );
+    console.log("top: " + e.y + "px")
+    e.target.style.left = e.x  + "px";
+    e.target.style.top = e.y + "px";
+    console.log("=======================");
+}
+function zoomGalaxy(e){
+    var galaxy = document.getElementsByClassName('galaxyCanvas')[0];
+    var e = window.event || e; // old IE support
+    var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+    galaxy.style.fontSize = parseFloat(galaxy.style.fontSize) + (delta * 0.01) + "em";
+    return false;
+}
+</script>
+</body>
+</html>
