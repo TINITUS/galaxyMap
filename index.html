@@ -5,7 +5,7 @@
     <title>galaxy map</title>
     <style>
         body{
-            font-size: 1em;
+            font-size: 100%;
         }
         main{
             overflow: hidden;
@@ -19,8 +19,61 @@
             top:0;
             left: 0;
             background-color: transparent;
-            width: 100%;
-            height: 100%;
+            width: 100em;
+            height: 100em;
+        }
+        .panHelper{
+            position: absolute;
+            background-color: transparent;
+            border: 1px solid purple;
+        }
+        .top{
+            top:0;
+            left:10%;
+            width: 79%;
+            height: 10%;
+        }
+        .top-right{
+            top:0;
+            right: 0;
+            width: 10%;
+            height: 10%;
+        }
+        .right{
+            right: 0;
+            top:10%;
+            width:10%;
+            height:79%;
+        }
+        .bottom-right{
+            bottom:0;
+            right: 0;
+            width: 10%;
+            height: 10%;
+        }
+        .bottom{
+            bottom:0;
+            left:10%;
+            width: 79%;
+            height: 10%;
+        }
+        .bottom-left{
+            bottom:0;
+            left: 0;
+            width: 10%;
+            height: 10%;
+        }
+        .left{
+            left: 0;
+            top:10%;
+            width:10%;
+            height:79%;
+        }
+        .top-left{
+            top:0;
+            right: 0;
+            width: 10%;
+            height: 10%;
         }
         .solSys {
             position: absolute;
@@ -67,21 +120,21 @@
             animation-iteration-count: infinite;
             animation-timing-function: linear;
         }
-        #solI.orbit, #zezdaI.orbit, #starI.orbit{
+        #solI.orbit, #zvezdaI.orbit, #starI.orbit{
             width: 6em;
             height: 6em;
             margin-top: -3em;
             margin-left: -3em;
             background-color: transparent;
         }
-        #solII.orbit, #zezdaII.orbit, #starII.orbit{
+        #solII.orbit, #zvezdaII.orbit, #starII.orbit{
             width: 10em;
             height: 10em;
             margin-top: -5em;
             margin-left: -5em;
             background-color: transparent;
         }
-        #solIII.orbit, #zezdaIII.orbit, #starIII.orbit{
+        #solIII.orbit, #zvezdaIII.orbit, #starIII.orbit{
             width: 13em;
             height: 13em;
             margin-top: -6.5em;
@@ -113,8 +166,9 @@
     Map like behavior of a page elements playground
 </header>
 <main id="container">
-  <div class="galaxyCanvas" style="font-size: 0.01em;" id="galaxy">
-      <div class="solSys" style="left: 50%;top: 50%;">
+
+    <div class="galaxyCanvas" style="font-size: 0.1em;" id="galaxy">
+        <div class="solSys" style="left: 50%;top: 50%;">
           <div id="solIII" class="orbit">
               <div class="pos">
                   <div class="planet"></div>
@@ -151,17 +205,17 @@
           <div class="sol"></div>
       </div>
       <div class="solSys" style="left: 70%;top: 70%;">
-          <div id="zezdaIII" class="orbit">
+          <div id="zvezdaIII" class="orbit">
               <div class="pos">
                   <div class="planet"></div>
               </div>
           </div>
-          <div id="zezdaII" class="orbit">
+          <div id="zvezdaII" class="orbit">
               <div class="pos">
                   <div class="planet"></div>
               </div>
           </div>
-          <div id="zezdaI" class="orbit">
+          <div id="zvezdaI" class="orbit">
               <div class="pos">
                   <div class="planet"></div>
               </div>
@@ -179,36 +233,22 @@ var galaxy = document.getElementById('galaxy');
 if(galContainer.addEventListener){
     galContainer.addEventListener("mousewheel", zoomGalaxy, false);
     galContainer.addEventListener("DOMMouseScroll", zoomGalaxy, false);
-    galaxy.addEventListener("drag", panGalaxy, false);
-    galaxy.addEventListener("dragend", panGalaxyEnd, false);
 }else{
     galContainer.attachEvent("onmousewheel", zoomGalaxy);
-    galaxy.attachEvent("ondrag", panGalaxy);
-    galaxy.attachEvent("ondragend", panGalaxyEnd);
 }
+var mouse = {x: 0, y: 0};
 
-function panGalaxy(e){
-    var e = window.event || e;
-    console.log(e);
-    console.log("x=> " + e.x + "  y=> " + e.y);
-    e.target.style.left = e.x + "px";
-    e.target.style.top = e.y + "px";
-}
-function panGalaxyEnd(e){
-    var e = window.event || e;
-    console.log("from end event:");
-    console.log(e)
-    console.log("left: " + e.x + " - " + 1000  + "px =>" + (e.x - 1000) + "px" );
-    console.log("top: " + e.y + "px")
-    e.target.style.left = e.x  + "px";
-    e.target.style.top = e.y + "px";
-    console.log("=======================");
-}
+galContainer.addEventListener('mousemove', function(e){
+    mouse.x = e.clientX || e.pageX;
+    mouse.y = e.clientY || e.pageY
+}, false);
+console.log(mouse.x + " " + mouse.y);
+
 function zoomGalaxy(e){
     var galaxy = document.getElementsByClassName('galaxyCanvas')[0];
     var e = window.event || e; // old IE support
     var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
-    galaxy.style.fontSize = parseFloat(galaxy.style.fontSize) + (delta * 0.01) + "em";
+    galaxy.style.fontSize = parseFloat(galaxy.style.fontSize) + (delta * 0.1) + "em";
     return false;
 }
 </script>

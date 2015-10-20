@@ -7,11 +7,13 @@
         html,body{
             height: 100%;
         }
+
         *{
             -moz-box-sizing: border-box;
             box-sizing: border-box;
             box-sizing: border-box;
         }
+
         html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video{
             border: 0;
             font-size: 100%;
@@ -20,6 +22,7 @@
             margin: 0;
             padding: 0;
         }
+
         .container{
             z-index: 1;
             position: relative;
@@ -29,6 +32,7 @@
             border: 1px solid gray;
             background-color: black;
         }
+
         .solSys {
             position: absolute;
             top: 10%;
@@ -36,6 +40,7 @@
             width: 16em;
             height: 16em;
         }
+
         .sol,.orbit,.planet,.pos{
             position: absolute;
             top: 50%;
@@ -46,47 +51,29 @@
         .orbit{
             border: 1px solid rgba(255, 255, 255, 0.2);
             -webkit-animation: 'rotation' 2s linear;
-            -webkit-animation-iteration-count: infinite;
+            -webkit-animation-iteration-count: infinite;       
         }
 
-        #solI.orbit{
-            width: 6em;
-            height: 6em;
-            margin-top: -3em;
-            margin-left: -3em;
-            background-color: transparent;
-        }
         .pos{
             width: 1em;
             height: 1em;
             margin-top: -0.5em;
             margin-left: -0.5em;
+            left: 0;
         }
+
         .planet{
             width: 1em;
             height: 1em;
             margin-top: -0.5em;
             margin-left: -0.5em;
-            background-color: #202020;
+            background-color: #582F0B;
             background-repeat: no-repeat;
             background-size: cover;
             animation-iteration-count: infinite;
             animation-timing-function: linear;
         }
-        #solII.orbit{
-            width: 10em;
-            height: 10em;
-            margin-top: -5em;
-            margin-left: -5em;
-            background-color: transparent;
-        }
-        #solIII.orbit{
-            width: 13em;
-            height: 13em;
-            margin-top: -6.5em;
-            margin-left: -6.5em;
-            background-color: transparent;
-        }
+
         .sol{
             position: absolute;
             top: 50%;
@@ -97,33 +84,141 @@
             margin-left: -1em;
             background-color: yellow;
         }
+
+        #solI>.orbit{
+            width: 6em;
+            height: 6em;
+            margin-top: -3em;
+            margin-left: -3em;
+            background-color: transparent;
+            animation-duration: 2s;
+            -webkit-animation-duration: 2s;
+        }
+
+        #solII>.orbit{
+            width: 10em;
+            height: 10em;
+            margin-top: -5em;
+            margin-left: -5em;
+            background-color: transparent;
+            animation-duration: 3.5s;
+            -webkit-animation-duration: 3.5s;
+        }
+
+        #solIII>.orbit{
+            width: 13em;
+            height: 13em;
+            margin-top: -6.5em;
+            margin-left: -6.5em;
+            background-color: transparent;            
+            animation-duration: 7.2s;
+            -webkit-animation-duration: 7.2s;
+            transform: rotateY(45deg);
+        }
+        
         @-webkit-keyframes rotation{
             0%   { -webkit-transform: rotate(0deg);}
             100% { -webkit-transform: rotate(-360deg);}
         }
 
+        .title{
+            color: #fff;
+            display: none;
+            position: absolute;
+            bottom: 0;            
+        }
+
+        .sol .title{
+            color:grey;
+            display: block;
+        }
+        .pos .planet:before{
+            content: " ";
+            height: 0.5em;
+            width: 1em;
+            border-radius: 1em 1em 0 0;
+            -moz-border-radius: 1em 1em 0 0;
+            -webkit-border-radius: 1em 1em 0 0;
+            background: rgb(88, 47, 11);
+            box-shadow: inset 0px -10px 10px rgba(0, 0, 0, 0.6);
+            position: absolute;
+            left: -25%;
+            bottom: 25%;
+            z-index: 2;
+            transform: rotate(-90deg);
+        }
+        .pos>.planet>.orbit{            
+            width: 3em;
+            height:3em;
+            margin-top: -1.5em;
+            margin-left: -1.5em;
+        }
     </style>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 </head>
 <body>
 <div class="container">
     <div class="solSys">
-        <div id="solIII" class="orbit">
-            <div class="planet"></div>
+        <div id="solIII">
+            <div class="orbit">
+                <div class="pos">                    
+                    <div class="planet">
+                        <div class="orbit"></div>
+                    </div>
+                </div>                
+            </div>
+            <div class="title">Sol III</div>    
+        </div>
+        <div id="solII">
+            <div class="orbit">
+                <div class="pos">
+                    <div class="planet">
+                        <div class="orbit"></div>
+                    </div>
+                </div>
+            </div>        
+            <div class="title">Sol II</div> 
+        </div>
+        <div id="solI">
+            <div class="orbit">
+                <div class="pos">
+                    <div class="planet">
+                        <div class="orbit"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="title">Sol I</div> 
+        </div>
+        <div class="sol">
+            <div class="title">Sol</div>
         </div>
     </div>
-    <div id="solII" class="orbit">
-        <div class="pos">
-            <div class="planet"></div>
-        </div>
-    </div>
-    <div id="solI" class="orbit">
-        <div class="pos">
-            <div class="planet"></div>
-        </div>
-    </div>
-    <div class="sol"></div>
 </div>
-</div>
+<script type="text/javascript">
+    var $titles = $('.title'), 
+        $orbits = $('.orbit');
+    $('body').on('click', '.orbit', function(evnt) {
+        evnt.preventDefault();
+        clearSelected();
+
+        $self = $(this);
+        $self.siblings('.title').show();
+        $self.css({
+            borderColor: 'rgba(255, 255, 255, 0.8)'
+        });
+    }).on('click', '.sol', function(evnt) {
+        evnt.preventDefault();
+        clearSelected();
+
+        $(this).children('.title').show();
+    });
+
+    function clearSelected() {
+        $titles.hide();
+        $orbits.css({
+            borderColor: 'rgba(255, 255, 255, 0.2)'
+        });
+    }
+</script>
 </body>
 </html>
-<div class="pos">
